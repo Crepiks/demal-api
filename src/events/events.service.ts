@@ -36,7 +36,11 @@ export class EventsService {
     return event;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+  async remove(id: number) {
+    const rowsDeleted = await this.eventsRepository.deleteById(id);
+
+    if (!rowsDeleted) {
+      throw new NotFoundException('Event not found');
+    }
   }
 }
