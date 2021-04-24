@@ -18,6 +18,7 @@ class EventModel extends Model {
 
   static get relationMappings() {
     const UserModel = require('./user.model');
+    const ImageModel = require('./image.model');
 
     return {
       creator: {
@@ -38,6 +39,18 @@ class EventModel extends Model {
             to: 'participants.userId',
           },
           to: 'users.id',
+        },
+      },
+      images: {
+        relation: Model.ManyToManyRelation,
+        modelClass: ImageModel,
+        join: {
+          from: 'events.id',
+          through: {
+            from: 'event_images.eventId',
+            to: 'event_images.imageId',
+          },
+          to: 'images.id',
         },
       },
     };

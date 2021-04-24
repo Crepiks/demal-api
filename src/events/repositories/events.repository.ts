@@ -10,6 +10,7 @@ export class EventsRepository {
     return EventModel.query().withGraphFetched({
       creator: true,
       participants: true,
+      images: true,
     });
   }
 
@@ -21,6 +22,7 @@ export class EventsRepository {
     return EventModel.query().findById(id).withGraphFetched({
       creator: true,
       participants: true,
+      images: true,
     });
   }
 
