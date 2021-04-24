@@ -10,14 +10,13 @@ export class UsersService {
   async validateUserByCredentials(
     email: string,
     password: string,
-  ): Promise<boolean> {
+  ): Promise<User> {
     const user = await this.usersRepository.findByEmail(email);
-
-    if (!user) {
-      throw new NotFoundException('User not found');
+    if (user && user.password === password) {
+      return user;
     }
 
-    return user.password === password;
+    return null;
   }
 
   createUser(payload: CreateUserDto): Promise<User> {
