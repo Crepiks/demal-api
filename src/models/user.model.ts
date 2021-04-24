@@ -10,6 +10,33 @@ class UserModel extends Model {
   emailConfirmedAt: string;
   password: string;
   createdAt: string;
+
+  static get relationMappings() {
+    const EventModel = require('./event.model');
+
+    return {
+      createdEvents: {
+        relation: Model.HasManyRelation,
+        modelClass: EventModel,
+        join: {
+          from: 'users.id',
+          to: 'events.creatorId',
+        },
+      },
+      participatingEvents: {
+        relation: Model.ManyToManyRelation,
+        modelClass: EventModel,
+        join: {
+          from: 'users.id',
+          through: {
+            from: 'participants.userId',
+            to: 'participants.eventId',
+          },
+          to: 'events.id',
+        },
+      },
+    };
+  }
 }
 
 module.exports = UserModel;

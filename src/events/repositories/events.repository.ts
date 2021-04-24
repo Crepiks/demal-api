@@ -7,7 +7,10 @@ import { UpdateEventDto } from '../dto/update-event.dto';
 @Injectable()
 export class EventsRepository {
   getEvents(): Promise<Event[]> {
-    return EventModel.query();
+    return EventModel.query().withGraphFetched({
+      creator: true,
+      participants: true,
+    });
   }
 
   insertAndFetch(payload: CreateEventDto): Promise<Event> {
@@ -15,7 +18,10 @@ export class EventsRepository {
   }
 
   findById(id: number): Promise<Event> {
-    return EventModel.query().findById(id);
+    return EventModel.query().findById(id).withGraphFetched({
+      creator: true,
+      participants: true,
+    });
   }
 
   updateAndFetchById(id: number, payload: UpdateEventDto): Promise<Event> {
