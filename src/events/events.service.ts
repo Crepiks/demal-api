@@ -26,8 +26,14 @@ export class EventsService {
     return event;
   }
 
-  update(id: number, payload: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, payload: UpdateEventDto) {
+    const event = await this.eventsRepository.updateAndFetchById(id, payload);
+
+    if (!event) {
+      throw new NotFoundException('Event not found');
+    }
+
+    return event;
   }
 
   remove(id: number) {
