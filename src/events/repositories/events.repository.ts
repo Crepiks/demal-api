@@ -33,4 +33,16 @@ export class EventsRepository {
   deleteById(id: number): Promise<number> {
     return EventModel.query().deleteById(id);
   }
+
+  async addParticipant(eventId: number, participantId: number): Promise<Event> {
+    await EventModel.relatedQuery('participants')
+      .for(eventId)
+      .relate(participantId);
+    const event = await EventModel.query().findById(eventId).withGraphFetched({
+      creator: true,
+      participants: true,
+    });
+
+    return event;
+  }
 }

@@ -10,6 +10,7 @@ import {
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
+import { AddPartipantDto } from './dto/add-participant.dto';
 
 @Controller('api/events')
 export class EventsController {
@@ -49,5 +50,18 @@ export class EventsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.eventsService.remove(+id);
+  }
+
+  @Post(':id/participants')
+  async addPaticipant(
+    @Param('id') id: string,
+    @Body() addPartipantDto: AddPartipantDto,
+  ) {
+    return {
+      event: await this.eventsService.addPaticipant(
+        +id,
+        addPartipantDto.participantId,
+      ),
+    };
   }
 }

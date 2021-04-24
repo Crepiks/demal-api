@@ -26,7 +26,7 @@ export class EventsService {
     return event;
   }
 
-  async update(id: number, payload: UpdateEventDto) {
+  async update(id: number, payload: UpdateEventDto): Promise<Event> {
     const event = await this.eventsRepository.updateAndFetchById(id, payload);
 
     if (!event) {
@@ -36,11 +36,21 @@ export class EventsService {
     return event;
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<void> {
     const rowsDeleted = await this.eventsRepository.deleteById(id);
 
     if (!rowsDeleted) {
       throw new NotFoundException('Event not found');
     }
+  }
+
+  async addPaticipant(id: number, participantId: number): Promise<Event> {
+    const event = await this.eventsRepository.addParticipant(id, participantId);
+
+    if (!event) {
+      throw new NotFoundException('Event not found');
+    }
+
+    return event;
   }
 }
