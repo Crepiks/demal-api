@@ -12,8 +12,8 @@ export class EventsService {
     return this.eventsRepository.getEvents();
   }
 
-  create(payload: CreateEventDto) {
-    return 'This action adds a new event';
+  create(payload: CreateEventDto): Promise<Event> {
+    return this.eventsRepository.insertAndFetch(payload);
   }
 
   findOne(id: number) {
