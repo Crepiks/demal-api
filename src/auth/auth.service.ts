@@ -50,7 +50,7 @@ export class AuthService {
       throw new UnauthorizedException('Bad credentials');
     }
 
-    const token = await this.generateToken({ id: user.id, email: user.email });
+    const token = this.generateToken({ id: user.id, email: user.email });
 
     return {
       user,
