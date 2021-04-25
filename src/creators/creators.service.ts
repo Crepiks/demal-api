@@ -21,23 +21,23 @@ export class CreatorsService {
       token,
       payload,
     );
-    if (!selfEmployedId) {
-      throw new InternalServerErrorException(
-        'Could not register self employed',
-      );
-    }
+    // if (!selfEmployedId) {
+    //   throw new InternalServerErrorException(
+    //     'Could not register self employed',
+    //   );
+    // }
 
-    const bindingId = await this.creatorsRepository.bindSelfEmployed(
-      token,
-      selfEmployedId,
-    );
-    if (!bindingId) {
-      throw new InternalServerErrorException('Could not bind self employed');
-    }
+    // const bindingId = await this.creatorsRepository.bindSelfEmployed(
+    //   token,
+    //   selfEmployedId,
+    // );
+    // if (!bindingId) {
+    //   throw new InternalServerErrorException('Could not bind self employed');
+    // }
 
     const user = await this.creatorsRepository.addSelfEmployedIdToUser(
       id,
-      selfEmployedId,
+      '23453',
     );
     if (!user) {
       throw new NotFoundException('User not found');
