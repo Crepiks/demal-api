@@ -17,9 +17,19 @@ export class UsersRepository {
   }
 
   findUserById(id: number): Promise<User> {
-    return UserModel.query().findById(id).withGraphFetched({
-      createdEvents: true,
-      participatingEvents: true,
-    });
+    return UserModel.query()
+      .findById(id)
+      .withGraphFetched({
+        createdEvents: {
+          creator: true,
+          participants: true,
+          images: true,
+        },
+        participatingEvents: {
+          creator: true,
+          participants: true,
+          images: true,
+        },
+      });
   }
 }
