@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
+import { User } from 'src/entities/users.entity';
+import UserModel from 'src/models/user.model';
 import { CreateCreatorDto } from '../dto/create-creator.dto';
 
 @Injectable()
@@ -65,7 +67,6 @@ export class CreatorsRepository {
         },
       });
     } catch (e) {
-      console.log(e);
       return '';
     }
 
@@ -95,10 +96,13 @@ export class CreatorsRepository {
         },
       });
     } catch (e) {
-      console.log(e);
       return '';
     }
 
     return response.data.id;
+  }
+
+  addSelfEmployedIdToUser(id: number, selfEmployedId: string): Promise<User> {
+    return UserModel.query().patchAndFetchById(id, { selfEmployedId });
   }
 }

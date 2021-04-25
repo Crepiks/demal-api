@@ -9,6 +9,7 @@ class UserModel extends Model {
   email: string;
   emailConfirmedAt: string;
   password: string;
+  selfEmployedId: string;
   createdAt: string;
 
   static get relationMappings() {
