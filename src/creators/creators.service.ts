@@ -1,17 +1,29 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { CreateCreatorDto } from './dto/create-creator.dto';
 import { CreatorsRepository } from './repositories/creators.repository';
 
 @Injectable()
 export class CreatorsService {
   constructor(private readonly creatorsRepository: CreatorsRepository) {}
 
-  async create() {
+  async create(payload: CreateCreatorDto) {
     const token = await this.creatorsRepository.authenticate();
 
     if (!token) {
-      throw new InternalServerErrorException('Cannot authenticate service');
+      throw new InternalServerErrorException('Could not authenticate service');
     }
 
-    return token;
+    const selfEmployedId = await this.creatorsRepository.registerSelfEmployed(
+      token,
+      payload,
+    );
+
+    if (!selfEmployedId) {
+      throw new InternalServerErrorException(
+        'Could not register self employed',
+      );
+    }
+
+    return selfEmployedId;
   }
 }
