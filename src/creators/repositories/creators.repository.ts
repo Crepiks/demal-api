@@ -4,6 +4,8 @@ import { CreateCreatorDto } from '../dto/create-creator.dto';
 
 @Injectable()
 export class CreatorsRepository {
+  platformId = 'c1f37217-02b6-4a6e-938f-acd06025d2fd';
+
   async authenticate(): Promise<string> {
     let response: AxiosResponse<any>;
 
@@ -36,7 +38,6 @@ export class CreatorsRepository {
     token: string,
     payload: CreateCreatorDto,
   ): Promise<string> {
-    const id = 'c1f37217-02b6-4a6e-938f-acd06025d2fd';
     let response: AxiosResponse<any>;
 
     try {
@@ -48,7 +49,7 @@ export class CreatorsRepository {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          externalId: id,
+          externalId: this.platformId,
           nationality: payload.nationality,
           initials: {
             firstName: payload.firstName,
@@ -61,6 +62,36 @@ export class CreatorsRepository {
           phone: {
             phone: payload.phone,
           },
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      return '';
+    }
+
+    return response.data.id;
+  }
+
+  async bindSelfEmployed(token: string, personId: string): Promise<string> {
+    let response: AxiosResponse<any>;
+
+    try {
+      response = await axios({
+        method: 'PUT',
+        url: `http://185.209.114.26:8080/subject/smz/${personId}/bind`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          externalId: this.platformId,
+          permissions: [
+            'INCOME_REGISTRATION',
+            'PAYMENT_INFORMATION',
+            'INCOME_LIST',
+            'INCOME_SUMMARY',
+            'CANCEL_INCOME',
+          ],
         },
       });
     } catch (e) {

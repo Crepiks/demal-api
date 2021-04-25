@@ -6,7 +6,7 @@ import { CreatorsRepository } from './repositories/creators.repository';
 export class CreatorsService {
   constructor(private readonly creatorsRepository: CreatorsRepository) {}
 
-  async create(payload: CreateCreatorDto) {
+  async create(payload: CreateCreatorDto): Promise<string> {
     const token = await this.creatorsRepository.authenticate();
 
     if (!token) {
@@ -22,6 +22,15 @@ export class CreatorsService {
       throw new InternalServerErrorException(
         'Could not register self employed',
       );
+    }
+
+    const bindingId = await this.creatorsRepository.bindSelfEmployed(
+      token,
+      selfEmployedId,
+    );
+
+    if (!bindingId) {
+      throw new InternalServerErrorException('Could not bind self employed');
     }
 
     return selfEmployedId;
