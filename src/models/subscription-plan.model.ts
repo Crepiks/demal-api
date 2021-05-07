@@ -5,7 +5,7 @@ class SubscriptionPlanModel extends Model {
 
   id: number;
   title: string;
-  price: string;
+  price: number;
   duration: number;
 
   static get relationMappings() {}

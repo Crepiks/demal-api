@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SubscriptionPlan } from 'src/entities/subscription-plan.entity';
-import EventModel from 'src/models/event.model';
+import SubscriptionPlanModel from 'src/models/subscription-plan.model';
 import { CreateSubscriptionPlanDto } from '../dto/create-subscription-plan.dto';
 
 @Injectable()
@@ -12,9 +12,13 @@ export class SubscriptionPlansRepository {
   //     images: true,
   //   });
   // }
-  insertAndFetch(payload: CreateSubscriptionPlanDto): Promise<Event> {
-    return EventModel.query().insertAndFetch(payload);
+
+  insertAndFetch(
+    payload: CreateSubscriptionPlanDto,
+  ): Promise<SubscriptionPlan> {
+    return SubscriptionPlanModel.query().insertAndFetch(payload);
   }
+
   // findById(id: number): Promise<Event> {
   //   return EventModel.query().findById(id).withGraphFetched({
   //     creator: true,
