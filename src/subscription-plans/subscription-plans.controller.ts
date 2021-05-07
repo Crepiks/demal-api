@@ -1,14 +1,33 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Patch, Param } from '@nestjs/common';
 import { SubscriptionPlansService } from './subscription-plans.service';
+import { CreateSubscriptionPlanDto } from './dto/create-subscription-plan.dto';
+import { UpdateSubscriptionPlanDto } from './dto/update-subscription-plan.dto';
 
-@Controller('subscription-plans')
+@Controller('api/subscription-plans')
 export class SubscriptionPlansController {
   constructor(
     private readonly subscriptionPlansService: SubscriptionPlansService,
   ) {}
 
-  @Post('register')
-  register(@Body() registerUserDto: RegisterUserDto) {
-    return this.authService.register(registerUserDto);
+  @Get()
+  async fetchAll() {
+    return {
+      events: await this.subscriptionPlansService.fetchAll(),
+    };
+  }
+
+  @Post()
+  create(@Body() createSubscriptionPlanDto: CreateSubscriptionPlanDto) {
+    return this.subscriptionPlansService.create(createSubscriptionPlanDto);
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateEventDto: UpdateEventDto,
+  ) {
+    return {
+      event: await this.eventsService.update(+id, updateEventDto),
+    };
   }
 }

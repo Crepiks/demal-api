@@ -5,13 +5,9 @@ import { CreateSubscriptionPlanDto } from '../dto/create-subscription-plan.dto';
 
 @Injectable()
 export class SubscriptionPlansRepository {
-  // getEvents(): Promise<Event[]> {
-  //   return EventModel.query().withGraphFetched({
-  //     creator: true,
-  //     participants: true,
-  //     images: true,
-  //   });
-  // }
+  getSubscriptionPlans(): Promise<SubscriptionPlan[]> {
+    return SubscriptionPlanModel.query();
+  }
 
   insertAndFetch(
     payload: CreateSubscriptionPlanDto,

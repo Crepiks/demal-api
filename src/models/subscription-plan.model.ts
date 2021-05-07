@@ -7,6 +7,7 @@ class SubscriptionPlanModel extends Model {
   title: string;
   price: number;
   duration: number;
+  createdAt: string;
 
   static get relationMappings() {}
 }
