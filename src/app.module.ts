@@ -5,8 +5,9 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { CreatorsModule } from './creators/creators.module';
+import { SubscriptionPlansModule } from './subscription-plans/subscription-plans.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule, AuthModule, UsersModule, EventsModule, CreatorsModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule, AuthModule, UsersModule, EventsModule, CreatorsModule, SubscriptionPlansModule],
 })
 export class AppModule {}
