@@ -8,8 +8,6 @@ class SubscriptionPlanModel extends Model {
   price: number;
   duration: number;
   createdAt: string;
-
-  static get relationMappings() {}
 }
 
 module.exports = SubscriptionPlanModel;

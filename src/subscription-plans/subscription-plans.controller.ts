@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, Patch, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SubscriptionPlansService } from './subscription-plans.service';
 import { CreateSubscriptionPlanDto } from './dto/create-subscription-plan.dto';
 import { UpdateSubscriptionPlanDto } from './dto/update-subscription-plan.dto';
@@ -21,13 +29,21 @@ export class SubscriptionPlansController {
     return this.subscriptionPlansService.create(createSubscriptionPlanDto);
   }
 
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.subscriptionPlansService.remove(+id);
+  }
+
   @Patch(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateEventDto: UpdateEventDto,
+    @Body() updateSubscriptionPlanDto: UpdateSubscriptionPlanDto,
   ) {
     return {
-      event: await this.eventsService.update(+id, updateEventDto),
+      event: await this.subscriptionPlansService.update(
+        +id,
+        updateSubscriptionPlanDto,
+      ),
     };
   }
 }
