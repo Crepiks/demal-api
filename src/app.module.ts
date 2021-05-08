@@ -7,7 +7,6 @@ import { ToursModule } from './tours/tours.module';
 import { CreatorsModule } from './creators/creators.module';
 import { SubscriptionPlansModule } from './subscription-plans/subscription-plans.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
-import { TagsController } from './tags/tags.controller';
 import { TagsModule } from './tags/tags.module';
 
 @Module({
@@ -22,6 +21,5 @@ import { TagsModule } from './tags/tags.module';
     SubscriptionsModule,
     TagsModule,
   ],
-  controllers: [TagsController],
 })
 export class AppModule {}
