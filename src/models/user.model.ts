@@ -14,6 +14,7 @@ class UserModel extends Model {
 
   static get relationMappings() {
     const EventModel = require('./event.model');
+    const SubscriptionModel = require('./subscription.model');
 
     return {
       createdEvents: {
@@ -22,6 +23,14 @@ class UserModel extends Model {
         join: {
           from: 'users.id',
           to: 'events.creatorId',
+        },
+      },
+      subscriptions: {
+        relation: Model.HasManyRelation,
+        modelClass: SubscriptionModel,
+        join: {
+          from: 'users.id',
+          to: 'subscriptions.userId',
         },
       },
       participatingEvents: {

@@ -1,4 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body, Param } from '@nestjs/common';
+import { SubscriptionsService } from './subscriptions.service';
+import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 
-@Controller('subscriptions')
-export class SubscriptionsController {}
+@Controller('api/subscriptions')
+export class SubscriptionsController {
+  constructor(private readonly subscriptionsService: SubscriptionsService) {}
+
+  @Post()
+  async create(@Body() createSubscriptionDto: CreateSubscriptionDto) {
+    return this.subscriptionsService.create(createSubscriptionDto);
+  }
+}
