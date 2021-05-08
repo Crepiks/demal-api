@@ -1,19 +1,20 @@
 import { Model } from 'objection';
 import UserModel from './user.model';
 
-class EventModel extends Model {
-  static tableName = 'events';
+class TourModel extends Model {
+  static tableName = 'tours';
 
   id: number;
   title: string;
-  decription: string;
+  description: string;
+  rating: number;
   lat: number;
   lon: number;
+  startingLocation: string;
   start: string;
   end: string;
-  price: number;
+  equipment: string;
   createdAt: string;
-  creatorId: UserModel;
   participants: UserModel[];
 
   static get relationMappings() {
@@ -21,21 +22,13 @@ class EventModel extends Model {
     const ImageModel = require('./image.model');
 
     return {
-      creator: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: UserModel,
-        join: {
-          from: 'events.creatorId',
-          to: 'users.id',
-        },
-      },
       participants: {
         relation: Model.ManyToManyRelation,
         modelClass: UserModel,
         join: {
-          from: 'events.id',
+          from: 'tours.id',
           through: {
-            from: 'participants.eventId',
+            from: 'participants.tourId',
             to: 'participants.userId',
           },
           to: 'users.id',
@@ -45,10 +38,10 @@ class EventModel extends Model {
         relation: Model.ManyToManyRelation,
         modelClass: ImageModel,
         join: {
-          from: 'events.id',
+          from: 'tours.id',
           through: {
-            from: 'event_images.eventId',
-            to: 'event_images.imageId',
+            from: 'tour_images.tourId',
+            to: 'tour_images.imageId',
           },
           to: 'images.id',
         },
@@ -57,5 +50,5 @@ class EventModel extends Model {
   }
 }
 
-module.exports = EventModel;
-export default EventModel;
+module.exports = TourModel;
+export default TourModel;

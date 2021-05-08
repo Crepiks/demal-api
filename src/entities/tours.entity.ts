@@ -1,11 +1,13 @@
-export class Event {
+export class Tour {
   id: number;
   title: string;
-  decription: string;
+  description: string;
+  rating: number;
   lat: number;
   lon: number;
+  startingLocation: string;
   start: string;
   end: string;
-  price: number;
+  equipment: string;
   createdAt: string;
 }
