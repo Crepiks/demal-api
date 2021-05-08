@@ -20,7 +20,7 @@ export class SubscriptionPlansController {
   @Get()
   async fetchAll() {
     return {
-      events: await this.subscriptionPlansService.fetchAll(),
+      subscriptionPlans: await this.subscriptionPlansService.fetchAll(),
     };
   }
 
@@ -40,7 +40,7 @@ export class SubscriptionPlansController {
     @Body() updateSubscriptionPlanDto: UpdateSubscriptionPlanDto,
   ) {
     return {
-      event: await this.subscriptionPlansService.update(
+      subscriptionPlan: await this.subscriptionPlansService.update(
         +id,
         updateSubscriptionPlanDto,
       ),
