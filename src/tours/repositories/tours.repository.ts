@@ -39,7 +39,17 @@ export class ToursRepository {
       .for(tourId)
       .relate(participantId);
     const tour = await TourModel.query().findById(tourId).withGraphFetched({
-      creator: true,
+      tags: true,
+      participants: true,
+    });
+
+    return tour;
+  }
+
+  async addTag(tourId: number, tagId: number): Promise<Tour> {
+    await TourModel.relatedQuery('tags').for(tourId).relate(tagId);
+    const tour = await TourModel.query().findById(tourId).withGraphFetched({
+      tags: true,
       participants: true,
     });
 

@@ -53,4 +53,14 @@ export class ToursService {
 
     return tour;
   }
+
+  async addTag(id: number, tagId: number): Promise<Tour> {
+    const tour = await this.toursRepository.addTag(id, tagId);
+
+    if (!tour) {
+      throw new NotFoundException('tour not found');
+    }
+
+    return tour;
+  }
 }

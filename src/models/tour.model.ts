@@ -17,9 +17,11 @@ class TourModel extends Model {
   equipment: string;
   createdAt: string;
   participants: UserModel[];
+  tags: TagModel[];
 
   static get relationMappings() {
     const UserModel = require('./user.model');
+    const TagModel = require('./tag.model');
     const ImageModel = require('./image.model');
 
     return {

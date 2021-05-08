@@ -10,6 +10,7 @@ import {
 import { ToursService } from './tours.service';
 import { CreateTourDto } from './dto/create-tour.dto';
 import { UpdateTourDto } from './dto/update-tour.dto';
+import { AddTagDto } from './dto/add-tag.dto';
 import { AddPartipantDto } from './dto/add-participant.dto';
 
 @Controller('api/tours')
@@ -59,6 +60,13 @@ export class ToursController {
         +id,
         addPartipantDto.participantId,
       ),
+    };
+  }
+
+  @Post(':id/tags')
+  async addTag(@Param('id') id: string, @Body() addTagDto: AddTagDto) {
+    return {
+      tour: await this.toursService.addTag(+id, addTagDto.tagId),
     };
   }
 }
