@@ -6,11 +6,18 @@ import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { CreatorsModule } from './creators/creators.module';
 import { SubscriptionPlansModule } from './subscription-plans/subscription-plans.module';
-import { SubscriptionsController } from './subscriptions/subscriptions.controller';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule, AuthModule, UsersModule, EventsModule, CreatorsModule, SubscriptionPlansModule, SubscriptionsModule],
-  controllers: [SubscriptionsController],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    DatabaseModule,
+    AuthModule,
+    UsersModule,
+    EventsModule,
+    CreatorsModule,
+    SubscriptionPlansModule,
+    SubscriptionsModule,
+  ],
 })
 export class AppModule {}
