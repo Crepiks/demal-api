@@ -1,7 +1,7 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable('event_images', (table) => {
+  return knex.schema.createTable('tours_images', (table) => {
     table.increments('id');
     table.integer('eventId').unsigned().notNullable();
     table.foreign('eventId').references('events.id').onDelete('CASCADE');
@@ -13,5 +13,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-  return knex.schema.dropTable('event_images');
+  return knex.schema.dropTable('tours_images');
 }

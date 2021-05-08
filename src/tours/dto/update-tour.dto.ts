@@ -1,10 +1,11 @@
-export class CreateEventDto {
-  id: number;
+export class UpdateTourDto {
   title: string;
   decription: string;
+  rating: number;
   lat: number;
   lon: number;
+  startingLocation: string;
   start: string;
   end: string;
-  price: number;
+  equipment: string;
 }

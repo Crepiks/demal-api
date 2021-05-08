@@ -5,9 +5,9 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     table.integer('userId').unsigned().notNullable();
     table.foreign('userId').references('users.id').onDelete('CASCADE');
-    table.integer('eventId').unsigned().notNullable();
-    table.foreign('eventId').references('events.id').onDelete('CASCADE');
-    table.unique(['userId', 'eventId']);
+    table.integer('tourId').unsigned().notNullable();
+    table.foreign('tourId').references('tours.id').onDelete('CASCADE');
+    table.unique(['userId', 'tourId']);
     table.timestamp('createdAt').defaultTo(knex.fn.now());
   });
 }

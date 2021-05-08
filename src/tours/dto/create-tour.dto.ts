@@ -1,11 +1,11 @@
-export class Event {
-  id: number;
+export class CreateTourDto {
   title: string;
   decription: string;
+  rating: number;
   lat: number;
   lon: number;
+  startingLocation: string;
   start: string;
   end: string;
-  price: number;
-  createdAt: string;
+  equipment: string;
 }
