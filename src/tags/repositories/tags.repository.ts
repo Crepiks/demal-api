@@ -8,4 +8,8 @@ export class TagsRepository {
   async insertAndFetch(payload: CreateTagDto): Promise<Tag> {
     return TagModel.query().insertAndFetch(payload);
   }
+
+  deleteById(id: number): Promise<number> {
+    return TagModel.query().deleteById(id);
+  }
 }
