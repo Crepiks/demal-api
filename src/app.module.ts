@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { EventsModule } from './events/events.module';
+import { ToursModule } from './tours/tours.module';
 import { CreatorsModule } from './creators/creators.module';
 import { SubscriptionPlansModule } from './subscription-plans/subscription-plans.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
@@ -14,7 +14,7 @@ import { SubscriptionsModule } from './subscriptions/subscriptions.module';
     DatabaseModule,
     AuthModule,
     UsersModule,
-    EventsModule,
+    ToursModule,
     CreatorsModule,
     SubscriptionPlansModule,
     SubscriptionsModule,

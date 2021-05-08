@@ -19,28 +19,28 @@ export class ToursController {
   @Get()
   async findAll() {
     return {
-      events: await this.toursService.findAll(),
+      tours: await this.toursService.findAll(),
     };
   }
 
   @Post()
   async create(@Body() createTourDto: CreateTourDto) {
     return {
-      event: await this.toursService.create(createTourDto),
+      tour: await this.toursService.create(createTourDto),
     };
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return {
-      event: await this.toursService.findOne(+id),
+      tour: await this.toursService.findOne(+id),
     };
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateTourDto: UpdateTourDto) {
     return {
-      event: await this.toursService.update(+id, updateTourDto),
+      tour: await this.toursService.update(+id, updateTourDto),
     };
   }
 
@@ -55,7 +55,7 @@ export class ToursController {
     @Body() addPartipantDto: AddPartipantDto,
   ) {
     return {
-      event: await this.toursService.addPaticipant(
+      tour: await this.toursService.addPaticipant(
         +id,
         addPartipantDto.participantId,
       ),

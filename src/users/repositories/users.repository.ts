@@ -7,8 +7,7 @@ import { User } from '../../entities/users.entity';
 export class UsersRepository {
   findByEmail(email: string): Promise<User> {
     return UserModel.query().findOne({ email }).withGraphFetched({
-      createdEvents: true,
-      participatingEvents: true,
+      participatingTours: true,
     });
   }
 
@@ -20,13 +19,7 @@ export class UsersRepository {
     return UserModel.query()
       .findById(id)
       .withGraphFetched({
-        createdEvents: {
-          creator: true,
-          participants: true,
-          images: true,
-        },
-        participatingEvents: {
-          creator: true,
+        participatingTours: {
           participants: true,
           images: true,
         },

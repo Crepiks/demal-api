@@ -1,6 +1,6 @@
 export class CreateTourDto {
   title: string;
-  decription: string;
+  description: string;
   rating: number;
   lat: number;
   lon: number;

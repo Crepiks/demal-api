@@ -13,18 +13,10 @@ class UserModel extends Model {
   createdAt: string;
 
   static get relationMappings() {
-    const EventModel = require('./event.model');
+    const TourModel = require('./tour.model');
     const SubscriptionModel = require('./subscription.model');
 
     return {
-      createdEvents: {
-        relation: Model.HasManyRelation,
-        modelClass: EventModel,
-        join: {
-          from: 'users.id',
-          to: 'events.creatorId',
-        },
-      },
       subscriptions: {
         relation: Model.HasManyRelation,
         modelClass: SubscriptionModel,
@@ -33,16 +25,16 @@ class UserModel extends Model {
           to: 'subscriptions.userId',
         },
       },
-      participatingEvents: {
+      participatingTours: {
         relation: Model.ManyToManyRelation,
-        modelClass: EventModel,
+        modelClass: TourModel,
         join: {
           from: 'users.id',
           through: {
             from: 'participants.userId',
-            to: 'participants.eventId',
+            to: 'participants.tourId',
           },
-          to: 'events.id',
+          to: 'tours.id',
         },
       },
     };
