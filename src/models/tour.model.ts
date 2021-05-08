@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 import UserModel from './user.model';
+import TagModel from './tag.model';
 
 class TourModel extends Model {
   static tableName = 'tours';
@@ -44,6 +45,18 @@ class TourModel extends Model {
             to: 'tour_images.imageId',
           },
           to: 'images.id',
+        },
+      },
+      tags: {
+        relation: Model.ManyToManyRelation,
+        modelClass: TagModel,
+        join: {
+          from: 'tours.id',
+          through: {
+            from: 'tour_tags.tourId',
+            to: 'tour_tags.tagId',
+          },
+          to: 'tags.id',
         },
       },
     };
